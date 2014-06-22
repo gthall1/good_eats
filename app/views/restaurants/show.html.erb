@@ -6,4 +6,34 @@
 <p><%= @restaurant.description %></p>
 <p><%= @restaurant.category %></p>
 
+<h2>Add a Review</h2>
+
+<br><br>
+
+<ul>
+  <% @restaurant.reviews.order(created_at: :desc).each do |review| %>
+    <li><%= review.rating %> - <%= review.body %></li>
+  <% end %>
+</ul>
+
+
+
+<%= form_for [@restaurant, @review] do |f| %>
+  <div>
+    <%= f.label "Rating: 1-5" %>
+    <%= f.text_field :rating, placeholder: "Enter rating" %>
+  </div>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_field :body, placeholder: "Enter review" %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
+
+
+<!-- buttons -->
+
+<%= link_to 'Delete Restaurant', restaurant_path(@restaurant), method: :delete %><br>
+
 <%= link_to 'Back to Restaurants', restaurants_path %>
