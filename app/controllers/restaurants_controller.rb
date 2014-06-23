@@ -26,6 +26,10 @@ class RestaurantsController < ApplicationController
     redirect_to restaurants_path
   end
 
+  def recentlyadded
+    @restaurants = Restaurant.limit(10)
+  end
+
   def restaurant_params
     params.require(:restaurant).permit(:name, :address, :city, :state, :zipcode, :description, :category)
   end
